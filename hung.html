@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Nguyễn Minh Hùng</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Kiểu tùy chỉnh cho CV đen trắng - Rút gọn 1 trang */
+        body {
+            background-color: #ffffff;
+            color: #1a202c;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.5; /* Giảm khoảng cách dòng nhẹ */
+            font-size: 10pt; /* Giảm cỡ chữ cơ bản */
+        }
+        .cv-container {
+            border: 1px solid #cbd5e0;
+            max-width: 794px; /* Kích thước A4 chiều rộng ~ */
+            min-height: 1123px; /* Kích thước A4 chiều cao ~ */
+            margin: 1rem auto;
+            background-color: #ffffff;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            border-radius: 0;
+            overflow: hidden;
+            padding: 1.5rem; /* Giảm padding tổng thể */
+            display: flex;
+            flex-direction: column;
+        }
+        .cv-header-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1rem; /* Giảm padding */
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 1rem; /* Giảm margin */
+        }
+        .cv-header-text {
+            flex-grow: 1;
+            text-align: left;
+            margin-right: 1.5rem; /* Giảm margin */
+        }
+         .cv-header-text h1 {
+            font-size: 1.8rem; /* Giảm cỡ chữ tên */
+            font-weight: 700;
+            margin-bottom: 0.25rem; /* Giảm margin */
+            color: #1a202c; /* Keep black color for consistency */
+        }
+         .cv-header-text div {
+             color: #4a5568;
+             font-size: 0.85rem; /* Giảm cỡ chữ địa chỉ */
+         }
+        .cv-photo-placeholder {
+            width: 80px; /* Giảm kích thước ảnh */
+            height: 100px;
+            border: 1px solid #cbd5e0;
+            background-color: #e2e8f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 0.7rem; /* Giảm cỡ chữ placeholder */
+            color: #718096;
+            flex-shrink: 0;
+        }
+        .cv-contact {
+            padding: 0.5rem 0; /* Giảm padding */
+            display: flex;
+            /* justify-content: space-between; */ /* Let items wrap naturally */
+            align-items: center;
+            font-size: 0.85rem; /* Giảm cỡ chữ liên hệ */
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 1rem; /* Giảm margin */
+            color: #2d3748;
+            flex-wrap: wrap; /* Cho phép xuống dòng nếu không đủ chỗ */
+        }
+        .cv-contact div {
+            margin-right: 1.5rem; /* Khoảng cách giữa các mục liên hệ */
+            margin-bottom: 0.25rem; /* Khoảng cách nếu xuống dòng */
+        }
+        .cv-section-title {
+            font-weight: 700;
+            padding-bottom: 0.25rem; /* Giảm padding */
+            border-bottom: 1px solid #cccccc; /* Viền đậm hơn chút */
+            margin-top: 1rem; /* Giảm margin */
+            margin-bottom: 0.75rem; /* Giảm margin */
+            color: #1a202c; /* Keep black color for consistency */
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.95rem; /* Giảm cỡ chữ tiêu đề */
+        }
+        .cv-section-content {
+            padding: 0; /* Bỏ padding riêng của section content */
+        }
+        .cv-list-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.4rem; /* Giảm margin */
+            font-size: 0.85rem; /* Giảm cỡ chữ list item */
+            color: #2d3748;
+        }
+        .cv-list-item svg.checkmark {
+            width: 0.8em; /* Giảm kích thước icon */
+            height: 0.8em;
+            margin-right: 0.4em; /* Giảm khoảng cách */
+            fill: #2d3748; /* Keep default checkmark color */
+            flex-shrink: 0;
+            margin-top: 0.2em;
+        }
+         /* Specific checkmark style for experience section */
+        .cv-experience-content .cv-list-item svg.checkmark {
+             fill: #4a5568; /* Match bullet color if using bullets, else use default */
+        }
+        .cv-experience-date {
+            font-weight: 600;
+            margin-bottom: 0.1rem; /* Giảm margin */
+            color: #4a5568;
+            font-size: 0.8rem; /* Giảm cỡ chữ ngày tháng */
+            text-transform: uppercase;
+        }
+        .cv-experience-title {
+            font-weight: 700;
+            margin-bottom: 0.25rem; /* Giảm margin */
+            color: #1a202c;
+            font-size: 0.9rem; /* Giảm cỡ chữ */
+        }
+        .cv-experience-company {
+             font-weight: 600;
+             color: #2d3748;
+             margin-bottom: 0.25rem; /* Giảm margin */
+             font-size: 0.85rem;
+        }
+        /* Using cv-list-item for experience and hobbies, so ul styles might not be needed */
+        .cv-section-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 0.25rem;
+        }
+        .cv-section-content ul li {
+             padding-left: 1.2em;
+             position: relative;
+             margin-bottom: 0.25rem;
+             color: #2d3748;
+             font-size: 0.85rem;
+        }
+        .cv-section-content ul li::before {
+            content: '-';
+            position: absolute;
+            left: 0.4em;
+            color: #4a5568;
+            font-weight: bold;
+            display: none; /* Hide bullet as we are using checkmarks */
+        }
+
+        .cv-experience-content .cv-list-item,
+        .cv-hobbies-content .cv-list-item {
+             padding-left: 0; /* Remove padding when using checkmarks */
+         }
+
+        .skills-container { /* Container cho kỹ năng */
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Chia 2 cột */
+            gap: 0 1.5rem; /* Khoảng cách giữa các cột */
+        }
+        .skills-container .cv-list-item {
+             margin-bottom: 0.3rem; /* Giảm margin cho kỹ năng */
+        }
+        .skills-container h3 {
+             font-weight: 700;
+             margin-bottom: 0.3rem;
+             font-size: 0.9rem;
+             color: #1a202c;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="cv-container">
+        <div class="cv-header-area">
+             <div class="cv-header-text">
+                <h1>Nguyễn Minh Hùng</h1>
+                <div>Suối Hiệp, Diên Khánh, Khánh Hòa</div>
+            </div>
+            <div class="cv-photo-placeholder">
+                Ảnh<br>của bạn
+            </div>
+        </div>
+        <div class="cv-contact">
+             <div>Điện thoại: 0905 165 096</div>
+             <div>Email: hung.nm.64cntt@ntu.edu.vn</div>
+        </div>
+
+        <div class="cv-main-content">
+
+            <div class="cv-section-title">KỸ NĂNG</div>
+            <div class="cv-section-content skills-container">
+                <div>
+                    <h3>Lập trình & Công nghệ</h3>
+                    <div class="cv-list-item">
+                        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                        <span>Ngôn ngữ: C#, Java, TypeScript, JavaScript, C/C++, HTML, CSS, ASP.NET, Python</span>
+                    </div>
+                     <div class="cv-list-item">
+                        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                        <span>HTML5/CSS3 với Bootstrap</span>
+                    </div>
+                    <div class="cv-list-item">
+                        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                        <span>MVC.NET Framework</span>
+                    </div>
+                    </div>
+                <div>
+                     <h3>Kỹ năng mềm</h3>
+                    <div class="cv-list-item">
+                        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                        <span>Kỹ năng làm việc nhóm (Scrum)</span>
+                    </div>
+                    <div class="cv-list-item">
+                        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                        <span>Kỹ năng thuyết trình</span>
+                    </div>
+                    <div class="cv-list-item">
+                        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                        <span>Kỹ năng lắng nghe</span>
+                    </div>
+                     <div class="cv-list-item">
+                        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                        <span>Kỹ năng quản lý thời gian</span>
+                    </div>
+                     <div class="cv-list-item">
+                        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                        <span>Kỹ năng giải quyết mâu thuẫn</span>
+                    </div>
+                     <div class="cv-list-item">
+                        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                        <span>Kỹ năng lãnh đạo</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cv-section-title">KINH NGHIỆM</div>
+            <div class="cv-section-content cv-experience-content">
+                <div class="cv-experience-date">09/2021 – HIỆN TẠI</div>
+                 <div class="cv-list-item">
+                    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                    <span>Sử dụng ngôn ngữ C# trên phần mềm Unity để tái hiện lại trò chơi nổi tiếng Tetris.</span>
+                </div>
+                <div class="cv-list-item">
+                    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                    <span>Xây dựng các phần mềm trên các môi trường Desktop/Web bằng ngôn ngữ ASP.NET theo mô hình MVC.</span>
+                </div>
+                 </div>
+
+            <div class="cv-section-title">SỞ THÍCH</div>
+             <div class="cv-section-content cv-hobbies-content">
+                 <div class="cv-list-item">
+                    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                    <span>Cầu lông, bóng rổ, đạp xe, ...</span>
+                </div>
+                 </div>
+        </div>
+    </div>
+
+</body>
+</html>
+S
